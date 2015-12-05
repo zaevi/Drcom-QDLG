@@ -22,11 +22,7 @@ if not Code:
 
 
 def captcha(source):
-    if isinstance(source, Image.Image):
-        img = source
-    else:
-        img = Image.open(source)
-
+    img = source if isinstance(source, Image.Image) else Image.open(source)
     imgs = [img.crop((x, 2, x + 6, 2 + 9)) for x in [5, 12, 19, 26]]
     imgCodes = [imageToCode(img) for img in imgs]
     code = [match(code) for code in imgCodes]
@@ -50,10 +46,5 @@ def match(code):
 
 
 def compareCode(code1, code2):
-    matched, n = 0, 0
-    for i in range(len(code1)):
-        if code1[i]:
-            n += 1
-            if code2[i]:
-                matched += 1
-    return matched / n
+    matched = [code1[i] and code2[i] for i in range(len(code1))].count(True)
+    return matched / code1.count(1)
