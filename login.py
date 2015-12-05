@@ -1,7 +1,7 @@
-from urllib import request, parse, error
+from urllib import request, parse
 from http import cookiejar
 import captcha
-from bs4 import BeautifulSoup
+import time
 
 userAgent = ['Mozilla/5.0 (Windows NT 10.0; WOW64)',
              'AppleWebKit/537.36 (KHTML, like Gecko) ',
@@ -39,7 +39,7 @@ def checkState():
     except:
         logined = False
         try:
-            openPage("http://192.168.3.11:7001/QDHWSingle/successlg.jsp")
+            openPage("http://10.5.2.3/")
         except:
             connected = False
         else:
@@ -76,8 +76,10 @@ def login(username, password):
     }
 
     openPage('http://192.168.3.11:7001/QDHWSingle/login.do', postData)
+    time.sleep(3)
 
-    if checkState() == (True, True):
+    logined, connected = checkState()
+    if logined:
         return True, "登录成功."
     else:
         return False, "登录失败!"
