@@ -23,7 +23,7 @@ def inputUser(username=None, password=None):
 
     if not password:
         password = input("输入密码: ")
-        if len(password) < 6:
+        if len(password) < 1:
             print("请输入正确的密码! ", end='')
             return inputUser(username)
 
