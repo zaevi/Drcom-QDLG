@@ -4,15 +4,6 @@ import os
 import time
 
 
-def getInput(text, warningText=None):
-    cmd = input(text)
-    if cmd:
-        return cmd
-    else:
-        print(warningText) if warningText else False
-        return getInput(text, warningText)
-
-
 def inputUser(username=None, password=None):
     if not username:
         username = input("输入帐号: ")
@@ -58,6 +49,7 @@ def toLogin():
 
 if __name__ == '__main__':
     print("校园网页面登录器 by 扎易 for 青岛理工大学")
+    print("https://github.com/Zaeworks/Drcom-QDLG")
     print("======================================")
     os.system("title Drcom@QDLG-Loginer")
 
