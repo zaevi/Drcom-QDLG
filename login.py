@@ -38,7 +38,7 @@ def ping(address):
 
 def checkState():
     connected = ping('10.5.2.3')
-    logined = ping('baidu.com')
+    logined = ping('www.baidu.com')
     return logined, connected
 
 
