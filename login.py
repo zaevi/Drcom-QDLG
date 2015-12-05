@@ -1,7 +1,7 @@
 from urllib import request, parse
 from http import cookiejar
 import captcha
-import time
+import os
 
 userAgent = ['Mozilla/5.0 (Windows NT 10.0; WOW64)',
              'AppleWebKit/537.36 (KHTML, like Gecko) ',
@@ -28,26 +28,18 @@ def openPage(url, data=None):
         data = parse.urlencode(data).encode(encoding='UTF8')
     req = request.Request(url, data=data, headers=header)
     res = opener.open(req)
-    # assert res.status == 200, ''.join([res.status, ' ', res.reason])
     return res
 
 
+def ping(address):
+    status = os.popen("ping -n 1 " + address).read()
+    return True if status.find('(0%') >= 0 else False
+
+
 def checkState():
-    logined, connected = True, True
-    try:
-        openPage("http://192.168.3.11:7001/QDHWSingle/loginlg.jsp")
-    except:
-        logined = False
-        try:
-            openPage("http://10.5.2.3/")
-        except:
-            connected = False
-        else:
-            logined = True
-    else:
-        logined = False
-    finally:
-        return logined, connected
+    connected = ping('10.5.2.3')
+    logined = ping('baidu.com')
+    return logined, connected
 
 
 def checkStateText(logined, connected):
@@ -76,7 +68,6 @@ def login(username, password):
     }
 
     openPage('http://192.168.3.11:7001/QDHWSingle/login.do', postData)
-    time.sleep(3)
 
     logined, connected = checkState()
     if logined:
