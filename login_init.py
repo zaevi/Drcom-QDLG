@@ -57,6 +57,10 @@ def toLogin():
         config.write(open('login.ini', 'w'))
 
 if __name__ == '__main__':
+    print("校园网页面登录器 by 扎易 for 青岛理工大学")
+    print("======================================")
+    os.system("title Drcom@QDLG-Loginer")
+
     logined, connected = login.checkState()
     print("网络状态: " + login.checkStateText(logined, connected))
     if logined:
