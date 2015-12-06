@@ -69,7 +69,7 @@ def login(username, password):
 
     openPage('http://192.168.3.11:7001/QDHWSingle/login.do', postData)
 
-    for i in range(5):
+    for i in range(20):
         logined, connected = checkState()
         if logined:
             return True, "登录成功."
