@@ -32,7 +32,7 @@ def openPage(url, data=None):
 
 
 def ping(address):
-    status = os.popen("ping -n 1 " + address).read()
+    status = os.popen("ping -n 1 -w 3000 " + address).read()
     return True if status.find('(0%') >= 0 else False
 
 
@@ -43,7 +43,7 @@ def checkState():
 
 
 def checkStateText(logined, connected):
-    text = "已连接, " if connected else "未连接"
+    text = "已连接, " if connected else "未连接, "
     text += "已登录" if logined else "未登录"
     return text
 
